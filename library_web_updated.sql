@@ -152,6 +152,28 @@ END $$
 DELIMITER ;
 
 DELIMITER $$
+CREATE TRIGGER UpdateCopiesAfterLoan
+AFTER INSERT ON loans
+FOR EACH ROW
+BEGIN
+    UPDATE books b
+    SET b.copiesAvailable = b.copiesAvailable - 1
+    where b.bookID = NEW.bookID;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER UpdateCopiesAfterHold
+AFTER INSERT ON holds
+FOR EACH ROW
+BEGIN
+    UPDATE books b
+    SET b.copiesAvailable = b.copiesAvailable - 1
+    where b.bookID = NEW.bookID;
+END $$
+DELIMITER ;
+
+DELIMITER $$
 CREATE TRIGGER PreventLoanDueToFines
 BEFORE INSERT ON loans
 FOR EACH ROW
