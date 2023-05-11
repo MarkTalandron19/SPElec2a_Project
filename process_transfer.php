@@ -19,6 +19,8 @@ if (isset($_POST["submit"])) {
     ];
     
     $transfer = $db->table('transfers')->insert($arr);
+    echo "Transfer successful. Your request will now be reviewed.";
+    echo "<a href=\"homepage.php\">Go back to home page.</a></br>";   
 
     unset($_POST);
 }

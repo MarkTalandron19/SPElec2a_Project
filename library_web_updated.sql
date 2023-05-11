@@ -2,14 +2,15 @@ CREATE DATABASE library;
 use library;
 
 CREATE TABLE branches (
-  branchID int primary key,
+  branchID int NOT NULL AUTO_INCREMENT,
   branchName varchar(99) NOT NULL,
   address varchar(99) NOT NULL,
-  phone varchar(20) DEFAULT NULL
+  phone varchar(20) DEFAULT NULL,
+  PRIMARY KEY (branchID)
 );
 
 CREATE TABLE books (
-  bookID int NOT NULL,
+  bookID int NOT NULL AUTO_INCREMENT,
   title varchar(99) NOT NULL,
   author varchar(99) DEFAULT NULL,
   pubYear year DEFAULT NULL,
@@ -23,17 +24,18 @@ CREATE TABLE books (
 );
 
 CREATE TABLE patrons(
-  patronID int primary key,
+  patronID int NOT NULL AUTO_INCREMENT,
   password varchar(99) NOT NULL,
   firstName varchar(99) NOT NULL,
   lastName varchar(99) NOT NULL,
   address varchar(99) NOT NULL,
   phone varchar(20) DEFAULT NULL,
-  hasFines boolean DEFAULT false
+  hasFines boolean DEFAULT false,
+  PRIMARY KEY (patronID)
 );
 
 CREATE TABLE loans (
-  loanID int NOT NULL,
+  loanID int  NOT NULL AUTO_INCREMENT,
   bookID int,
   branchID int,
   patronID int,
@@ -50,7 +52,7 @@ CREATE TABLE loans (
 );
 
 CREATE TABLE fines (
-  fineID int NOT NULL,
+  fineID int  NOT NULL AUTO_INCREMENT,
   loanID int,
   fineAmount decimal(8,2) NOT NULL,
   fineDate date NOT NULL,
@@ -61,7 +63,7 @@ CREATE TABLE fines (
   );
   
 CREATE TABLE periodicals (
-  periodicalID int NOT NULL,
+  periodicalID int NOT NULL AUTO_INCREMENT,
   title varchar(99) NOT NULL,
   publisher varchar(99) DEFAULT NULL,
   pubYear year DEFAULT NULL,
@@ -70,11 +72,12 @@ CREATE TABLE periodicals (
 );
 
 CREATE TABLE holds (
-    holdID INT PRIMARY KEY,
+    holdID INT  NOT NULL AUTO_INCREMENT,
     bookID INT,
     branchID INT,
     patronID INT,
     holdDate DATE NOT NULL,
+    PRIMARY KEY (holdID),
 	foreign key(bookID) references books(bookID)
 	on update cascade on delete set null,
 	foreign key(branchID) references branches(branchID)
@@ -84,7 +87,7 @@ CREATE TABLE holds (
 );
 
 CREATE TABLE transfers (
-  transferID INT NOT NULL,
+  transferID INT NOT NULL AUTO_INCREMENT,
   bookID INT,
   fromBranchID INT,
   toBranchID INT,
@@ -99,7 +102,7 @@ CREATE TABLE transfers (
   );
   
 CREATE TABLE videos (
-  videoID int NOT NULL,
+  videoID int  NOT NULL AUTO_INCREMENT,
   title varchar(99) NOT NULL,
   director varchar(99) DEFAULT NULL,
   releaseYear year DEFAULT NULL,
@@ -108,7 +111,7 @@ CREATE TABLE videos (
 );
 
 CREATE TABLE cds (
-  cdID int NOT NULL,
+  cdID int  NOT NULL AUTO_INCREMENT,
   title varchar(99) NOT NULL,
   artist varchar(99) DEFAULT NULL,
   releaseYear year DEFAULT NULL,

@@ -1,4 +1,6 @@
 <?php
+session_save_path('sessions');
+session_start();
 require_once('LibraryORM.php');
 $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
 
@@ -7,14 +9,14 @@ if (isset($_POST["submit"])) {
     $values = explode('|', $selected_option_value);
     $bookID = $values[0];
     $branchID = $values[1];
+    $patronID = $_SESSION['patronID'];
     $date = date('Y-m-d');
     $dueDate = date('Y-m-d', strtotime('+5 days'));
 
     $arr = [
-        'loanID' => 1,
         'bookID' => $bookID,
         'branchID' => $branchID,
-        'patronID' => 2,
+        'patronID' => $patronID,
         'loanDate' => $date,
         'dueDate' => $dueDate,
         'returnDate' => null
@@ -23,5 +25,8 @@ if (isset($_POST["submit"])) {
     $loan = $db->table('loans')->insert($arr);
 
     unset($_POST);
+
+    echo "Loan successful. Please retrieve the book at the counter.";
+    echo "<a href=\"homepage.php\">Go back to home page.</a></br>";   
 }
 ?>

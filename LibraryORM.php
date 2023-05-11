@@ -114,10 +114,8 @@ class LibraryORM
     {
         $fields = implode(", ", array_keys($arr));
         $placeholders = implode(',', array_fill(0, count($arr), '?'));
-        print_r($arr);
 
         $query = "INSERT INTO $this->table ($fields) VALUES ($placeholders)";
-        echo $query;
         $statement = $this->connection->prepare($query);
         $statement->execute(array_values($arr));
         // $this->dbString = '';

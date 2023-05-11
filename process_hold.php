@@ -1,24 +1,27 @@
 <?php
+session_save_path('sessions');
+session_start();
 require_once('LibraryORM.php');
 $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
-$result = $db->getBooksPerBranch();
 
 if (isset($_POST["submit"])) {
     $selected_option_value = $_POST['book'];
     $values = explode('|', $selected_option_value);
     $bookID = $values[0];
     $branchID = $values[1];
+    $patronID = $_SESSION['patronID'];
     $date = date('Y-m-d');
 
     $arr = [
-        'holdID' => 1,
         'bookID' => $bookID,
         'branchID' => $branchID,
-        'patronID' => 2,
+        'patronID' => $patronID,
         'holdDate' => $date
     ];
     
     $holds = $db->table('holds')->insert($arr);
+    echo "Hold successful.";
+    echo "<a href=\"homepage.php\">Go back to home page.</a></br>";   
 
     unset($_POST);
 }
