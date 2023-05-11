@@ -6,21 +6,19 @@ if (isset($_POST["submit"])) {
     $selected_option_value = $_POST['book'];
     $values = explode('|', $selected_option_value);
     $bookID = $values[0];
-    $branchID = $values[1];
+    $oldBranchID = $values[1];
+    $newBranchID = $_POST['branch'];
     $date = date('Y-m-d');
-    $dueDate = date('Y-m-d', strtotime('+5 days'));
 
     $arr = [
-        'loanID' => 1,
+        'transferID' => 1,
         'bookID' => $bookID,
-        'branchID' => $branchID,
-        'patronID' => 2,
-        'loanDate' => $date,
-        'dueDate' => $dueDate,
-        'returnDate' => null
+        'fromBranchID' => $oldBranchID,
+        'toBranchID' => $newBranchID,
+        'transferDate' => $date
     ];
     
-    $loan = $db->table('loans')->insert($arr);
+    $transfer = $db->table('transfers')->insert($arr);
 
     unset($_POST);
 }

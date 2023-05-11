@@ -191,7 +191,7 @@ CREATE TRIGGER PreventHoldDueToFines
 BEFORE INSERT ON holds
 FOR EACH ROW
 BEGIN
-	declare has_fines boolean;
+	DECLARE has_fines boolean;
     SELECT hasFines into has_fines from patrons where patronID = NEW.patronID; 
     IF has_fines = true THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'This patron cannot borrow because patron has fines.';
@@ -213,16 +213,53 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE TRIGGER CheckAvailableBeforeLoan
+BEFORE INSERT ON loans
+FOR EACH ROW
+BEGIN
+	DEClARE available int;
+    SELECT copiesAvailable into available from books where bookID = NEW.bookID; 
+    IF available = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No copies available. Loan failed.';
+    END IF;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER CheckAvailableBeforeHold
+BEFORE INSERT ON holds
+FOR EACH ROW
+BEGIN
+	DEClARE available int;
+    SELECT copiesAvailable into available from books where bookID = NEW.bookID; 
+    IF available = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No copies available. Holding request failed.';
+    END IF;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER CheckAvailableBeforeTransfer
+BEFORE INSERT ON transfers
+FOR EACH ROW
+BEGIN
+	DEClARE available int;
+    SELECT copiesAvailable into available from books where bookID = NEW.bookID; 
+    IF available = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No copies available. You cannot transfer selected book.';
+    END IF;
+END$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE TRIGGER UpdateFines
 AFTER INSERT ON fines
 FOR EACH ROW
 BEGIN
-    DECLARE fines_count INT;
-    SELECT COUNT(patronID) INTO fines_count FROM fines WHERE patronID = NEW.patronID and paid = false;
-    IF fines_count > 0 THEN
-        UPDATE patrons p
-        SET p.hasFines = true
-        WHERE p.patronID = NEW.patronID
+	DECLARE has_fines boolean;
+    SELECT hasFines into has_fines from patrons where patronID = NEW.patronID; 
+    IF has_fines = true THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'This patron cannot borrow because patron has fines.';
     END IF;
 END;
 DELIMITER ;
