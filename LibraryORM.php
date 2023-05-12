@@ -151,6 +151,13 @@ class LibraryORM
 
         return $this;
     }
+    public function and(string $attribute, string $value): object
+    {
+        $temp = "\"$value\"";
+        $this->whereClause .= ' AND ' . $attribute . ' = ' . $temp;
+
+        return $this;
+    }
 
     public function update(array $arr): array
     {
@@ -159,7 +166,6 @@ class LibraryORM
         if ($this->whereClause != '') {
             $query .= $this->whereClause;
         }
-        echo $query;
         $statement = $this->connection->prepare($query);
         $params = array_values($arr);
         $statement->execute($params);
@@ -218,6 +224,19 @@ class LibraryORM
         JOIN books b 
         ON br.branchID = b.branchID
         ORDER BY branchName";
+
+        $statement = $this->connection->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    public function getUserLoans($patronID): array
+    {
+        $query = "select l.bookID, title from books b inner join loans l 
+        on b.bookID = l.bookID inner join patrons p on l.patronID = p.patronID
+        and l.patronID = $patronID";
 
         $statement = $this->connection->prepare($query);
         $statement->execute();

@@ -1,8 +1,9 @@
 <?php
-session_save_path('sessions');
+session_save_path('..\sessions');
 session_start();
 
-require_once('LibraryORM.php');
+require_once('..\LibraryORM.php');
+require_once('..\classes\Patron.php');
 $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
 
 if ($_POST) {
@@ -10,17 +11,26 @@ if ($_POST) {
     $logInPass = $_POST['password'];
 
     $user = $db->select()->from('patrons')->where('patronID', $logInID)->get();
-    $db->printRows($user);
 
     if ($user && count($user) == 1) {
         $user = $user[0];
-        $_SESSION['patronID'] = $user['patronID'];
-        $_SESSION['password'] = $user['password'];
-        $_SESSION['firstName'] = $user['firstName'];
-        $_SESSION['lastName'] = $user['lastName'];
-        $_SESSION['address'] = $user['address'];
-        $_SESSION['phone'] = $user['phone'];
-        $_SESSION['hasFines'] = $user['hasFines'];
+        $patronID = $user['patronID'];
+        $password = $user['password'];
+        $firstName = $user['firstName'];
+        $lastName = $user['lastName'];
+        $address = $user['address'];
+        $phone = $user['phone'];
+        $hasFines = $user['hasFines'];
+        $patron = new Patron(
+            $patronID,
+            $password,
+            $firstName,
+            $lastName,
+            $address,
+            $phone,
+            $hasFines
+        );
+        $_SESSION['user'] = serialize($patron);
         header('Location: homepage.php');
         exit();
     } else {
