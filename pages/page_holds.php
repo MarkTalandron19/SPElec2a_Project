@@ -1,5 +1,5 @@
 <?php
-session_save_path('sessions');
+session_save_path('..\sessions');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Loan a Book</title>
+    <title>Hold a Book</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
@@ -16,7 +16,7 @@ session_start();
 
 <body>
     <?php
-    require_once('LibraryORM.php');
+    require_once('..\LibraryORM.php');
     $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
     $result = $db->getBooksPerBranch();
 
@@ -48,10 +48,9 @@ session_start();
     <form method="post" action="process_hold.php">
         <select name="book" id="hold">
             <?php
-            foreach($result as $row)
-            {
+            foreach ($result as $row) {
                 $value = $row["bookID"] . '|' . $row["branchID"];
-                echo "<option value=". $value . ">" . $row["Title"] . "</option>";
+                echo "<option value=" . $value . ">" . $row["Title"] . "</option>";
             }
             ?>
             <input type='submit' value='submit' name='submit'>

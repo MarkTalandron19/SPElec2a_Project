@@ -68,7 +68,9 @@ CREATE TABLE periodicals (
   publisher varchar(99) DEFAULT NULL,
   pubYear year DEFAULT NULL,
   isbn varchar(99) DEFAULT NULL,
-  PRIMARY KEY (periodicalID)
+  branchID int,
+  PRIMARY KEY (periodicalID),
+  FOREIGN KEY(branchID) references branches(branchID)
 );
 
 CREATE TABLE holds (
@@ -107,7 +109,9 @@ CREATE TABLE videos (
   director varchar(99) DEFAULT NULL,
   releaseYear year DEFAULT NULL,
   format varchar(99) DEFAULT NULL,
-  PRIMARY KEY (videoID)
+  branchID int,
+  PRIMARY KEY (videoID),
+  FOREIGN KEY(branchID) references branches(branchID)
 );
 
 CREATE TABLE cds (
@@ -116,7 +120,43 @@ CREATE TABLE cds (
   artist varchar(99) DEFAULT NULL,
   releaseYear year DEFAULT NULL,
   genre varchar(99) DEFAULT NULL,
-  PRIMARY KEY (cdID)
+  branchID int,
+  PRIMARY KEY (cdID),
+  FOREIGN KEY(branchID) references branches(branchID)
+);
+
+CREATE TABLE video_loans (
+  loanID int  NOT NULL AUTO_INCREMENT,
+  videoID int,
+  branchID int,
+  patronID int,
+  loanDate date NOT NULL,
+  dueDate date NOT NULL,
+  returnDate date,
+  PRIMARY KEY (loanID),
+  foreign key(videoID) references videos(videoID)
+  on update cascade on delete set null,
+  foreign key(branchID) references branches(branchID)
+  on update cascade on delete set null,
+  foreign key(patronID) references patrons(patronID)
+  on update cascade on delete set null
+);
+
+CREATE TABLE cd_loans (
+  loanID int  NOT NULL AUTO_INCREMENT,
+  cdID int,
+  branchID int,
+  patronID int,
+  loanDate date NOT NULL,
+  dueDate date NOT NULL,
+  returnDate date,
+  PRIMARY KEY (loanID),
+  foreign key(cdID) references cds(cdID)
+  on update cascade on delete set null,
+  foreign key(branchID) references branches(branchID)
+  on update cascade on delete set null,
+  foreign key(patronID) references patrons(patronID)
+  on update cascade on delete set null
 );
 
 DELIMITER $$
@@ -299,21 +339,21 @@ VALUES
 (4, 'Sports Illustrated', 'Maven Coalition, LLC', 2022, '9781547845429'),
 (5, 'Scientific American', 'Springer Nature', 2022, '9781547851239');
 
-INSERT INTO cds (cdID, title, artist, releaseYear, genre)
+INSERT INTO cds (cdID, title, artist, releaseYear, genre, branchID)
 VALUES
-(1, 'Beethoven: Symphony No. 5', 'Ludwig van Beethoven', 2010, 'Classical'),
-(2, 'Mozart: Requiem', 'Wolfgang Amadeus Mozart', 2005, 'Classical'),
-(3, 'Bach: Brandenburg Concertos', 'Johann Sebastian Bach', 2008, 'Classical'),
-(4, 'Vivaldi: The Four Seasons', 'Antonio Vivaldi', 2003, 'Classical'),
-(5, 'Chopin: Nocturnes', 'Frederic Chopin', 2012, 'Classical');
+(1, 'Beethoven: Symphony No. 5', 'Ludwig van Beethoven', 2010, 'Classical', 1),
+(2, 'Mozart: Requiem', 'Wolfgang Amadeus Mozart', 2005, 'Classical', 2),
+(3, 'Bach: Brandenburg Concertos', 'Johann Sebastian Bach', 2008, 'Classical', 3),
+(4, 'Vivaldi: The Four Seasons', 'Antonio Vivaldi', 2003, 'Classical', 4),
+(5, 'Chopin: Nocturnes', 'Frederic Chopin', 2012, 'Classical', 5);
 
-INSERT INTO videos (videoID, title, director, releaseYear, format)
+INSERT INTO videos (videoID, title, director, releaseYear, format, branchID)
 VALUES
-(1, 'The Thin Blue Line', 'Errol Morris', 1988, 'DVD'),
-(2, 'Man on Wire', 'James Marsh', 2008, 'Blu-ray'),
-(3, 'Jiro Dreams of Sushi', 'David Gelb', 2011, 'DVD'),
-(4, 'The Act of Killing', 'Joshua Oppenheimer', 2012, 'Blu-ray'),
-(5, 'Won\'t You Be My Neighbor?', 'Morgan Neville', 2018, 'DVD');
+(1, 'The Thin Blue Line', 'Errol Morris', 1988, 'DVD', 1),
+(2, 'Man on Wire', 'James Marsh', 2008, 'Blu-ray', 2),
+(3, 'Jiro Dreams of Sushi', 'David Gelb', 2011, 'DVD', 3),
+(4, 'The Act of Killing', 'Joshua Oppenheimer', 2012, 'Blu-ray', 4),
+(5, 'Won\'t You Be My Neighbor?', 'Morgan Neville', 2018, 'DVD', 5);
 
 -- insert into holds values (1, 1234567891, 1, 2, '2022-05-09');
 

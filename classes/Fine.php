@@ -1,6 +1,6 @@
 <?php
 
-class Fines
+class Fine
 {
     private $fineID;
     private $loanID;

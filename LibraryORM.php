@@ -130,19 +130,6 @@ class LibraryORM
         return [];
     }
 
-    public function insertHold(array $arr): array
-    {
-        $query = "INSERT INTO holds (holdID, bookID, branchID, patronID, holdDate)
-            VALUES (:holdID, :bookID, :branchID, :patronID, :holdDate)";
-        $stmt = $this->connection->prepare($query);
-        $stmt->bindValue(':holdID', $arr['holdID'], PDO::PARAM_INT);
-        $stmt->bindValue(':bookID', $arr['bookID'], PDO::PARAM_INT);
-        $stmt->bindValue(':branchID', $arr['branchID'], PDO::PARAM_INT);
-        $stmt->bindValue(':patronID', $arr['patronID'], PDO::PARAM_INT);
-        $stmt->bindValue(':holdDate', $arr['holdDate'], PDO::PARAM_STR);
-        $stmt->execute($arr);
-        return [];
-    }
 
     public function where(string $attribute, string $value): object
     {

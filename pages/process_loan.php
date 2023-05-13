@@ -1,7 +1,9 @@
 <?php
-session_save_path('sessions');
+session_save_path('..\sessions');
 session_start();
-require_once('LibraryORM.php');
+require_once('..\LibraryORM.php');
+require_once('..\classes\Patron.php');
+$patron = unserialize($_SESSION['user']);
 $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
 
 if (isset($_POST["submit"])) {
@@ -9,7 +11,7 @@ if (isset($_POST["submit"])) {
     $values = explode('|', $selected_option_value);
     $bookID = $values[0];
     $branchID = $values[1];
-    $patronID = $_SESSION['patronID'];
+    $patronID = $patron->getID();
     $date = date('Y-m-d');
     $dueDate = date('Y-m-d', strtotime('+5 days'));
 
