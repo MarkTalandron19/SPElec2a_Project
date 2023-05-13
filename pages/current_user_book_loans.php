@@ -6,7 +6,7 @@ require_once('..\classes\Patron.php');
 $patron = unserialize($_SESSION['user']);
 $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
 
-$loans = $db->select()->from('loans')->where('patronID', $patron->getID())->getAll();
+$loans = $db->getUserBookLoans($patron->getID());
 if (count($loans) > 0) {
     $db->printRows($loans);
 } else {

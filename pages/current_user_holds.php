@@ -6,7 +6,7 @@ require_once('..\classes\Patron.php');
 $patron = unserialize($_SESSION['user']);
 $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
 
-$holds = $db->select()->from('holds')->where('patronID', $patron->getID())->getAll();
+$holds = $db->getUserHolds($patron->getID());
 if (count($holds) > 0) {
     $db->printRows($holds);
 } else {

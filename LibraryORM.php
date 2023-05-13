@@ -219,11 +219,54 @@ class LibraryORM
         return $result;
     }
 
-    public function getUserLoans($patronID): array
+    public function getUserBookLoans($patronID): array
     {
-        $query = "select l.bookID, title from books b inner join loans l 
+        $query = "SELECT l.bookID AS 'Book ID', title AS 'Title', loanDate AS 'Loan Date',
+        dueDate AS 'Due Date'from books b inner join loans l 
         on b.bookID = l.bookID inner join patrons p on l.patronID = p.patronID
         and l.patronID = $patronID";
+
+        $statement = $this->connection->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    public function getUserVideoLoans($patronID): array
+    {
+        $query = "SELECT v.videoID AS 'Video ID', title AS 'Title', loanDate AS 'Loan Date',
+        dueDate AS 'Due Date'from videos v inner join video_loans vl 
+        on v.videoID = vl.videoID inner join patrons p on vl.patronID = p.patronID
+        and vl.patronID = $patronID";
+
+        $statement = $this->connection->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    public function getUserCDLoans($patronID): array
+    {
+        $query = "SELECT c.cdID AS 'CD ID', title AS 'Title', loanDate AS 'Loan Date',
+        dueDate AS 'Due Date'from cds c inner join cd_loans cl 
+        on c.cdID = cl.cdID inner join patrons p on cl.patronID = p.patronID
+        and cl.patronID = $patronID";
+
+        $statement = $this->connection->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    public function getUserHolds($patronID): array
+    {
+        $query = "SELECT h.bookID AS 'Book ID', title AS 'Title', holdDate as 'Hold Date' 
+        from books b inner join holds h on b.bookID = h.bookID 
+        inner join patrons p on h.patronID = p.patronID
+        and cl.patronID = $patronID";
 
         $statement = $this->connection->prepare($query);
         $statement->execute();
