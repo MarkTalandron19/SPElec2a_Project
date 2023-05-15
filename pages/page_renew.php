@@ -15,11 +15,12 @@
     session_save_path('..\sessions');
     session_start();
     require_once('..\LibraryORM.php');
+    require_once('..\classes\Patron.php');
     $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
-    $patronID = $_SESSION['patronID'];
+    $patron = unserialize($_SESSION['user']);
 
-    $loans = $db->select()->from('loans')->where('patronID', $patronID)->get();
-    $books = $db->getUserLoans($patronID);
+    $loans = $db->select()->from('loans')->where('patronID', $patron->getID())->get();
+    $books = $db->getUserBookLoans($patron->getID());
     ?>
     <?php
     if (count($loans) > 0) {

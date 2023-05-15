@@ -266,7 +266,7 @@ class LibraryORM
         $query = "SELECT h.bookID AS 'Book ID', title AS 'Title', holdDate as 'Hold Date' 
         from books b inner join holds h on b.bookID = h.bookID 
         inner join patrons p on h.patronID = p.patronID
-        and cl.patronID = $patronID";
+        and h.patronID = $patronID";
 
         $statement = $this->connection->prepare($query);
         $statement->execute();
