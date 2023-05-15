@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Process Loan</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='..\css\process.css'>
+</head>
+
+<body>
+
 <?php
 session_save_path('..\sessions');
 session_start();
@@ -32,3 +45,7 @@ if (isset($_POST["submit"])) {
     echo "<a href=\"homepage.php\">Go back to home page.</a></br>";   
 }
 ?>
+
+</body>
+
+</html>

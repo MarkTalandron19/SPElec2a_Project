@@ -48,25 +48,31 @@ if ($_POST) {
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Log In</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='..\css\main.css'>
 </head>
 
 <body>
-    <h1>Login</h1>
-    <?php if (isset($error)) { ?>
-        <p>
-            <?php echo $error; ?>
-        </p>
-    <?php } ?>
-    <form method="post" action="login.php">
-        <label for="patronID">Patron ID:</label>
-        <input type="text" name="patronID"><br>
-        <label for="password">Password:</label>
-        <input type="password" name="password"><br>
-        <input type="submit" value="Login">
-    </form>
-
+    <main>
+        <h1>Login</h1>
+        <?php if (isset($error)) { ?>
+            <p class="error-message">
+                <?php echo $error; ?>
+            </p>
+        <?php } ?>
+        <form method="post" action="login.php">
+            <div class="form-group">
+                <label for="patronID">Patron ID:</label>
+                <input type="text" id="patronID" name="patronID">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login">
+            </div>
+        </form>
+    </main>
 </body>
 
 </html>
