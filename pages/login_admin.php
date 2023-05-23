@@ -61,7 +61,7 @@ if ($_POST) {
         <?php } ?>
         <form method="post" action="login_admin.php">
             <div class="form-group">
-                <label for="adminID">Patron ID:</label>
+                <label for="adminID">Admin ID:</label>
                 <input type="text" id="adminID" name="adminID">
             </div>
             <div class="form-group">

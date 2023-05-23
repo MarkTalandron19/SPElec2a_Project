@@ -6,7 +6,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Loan a Book</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <!-- <link rel='stylesheet' type='text/css' media='screen' href='..\css\loan.css'> -->
+    <link rel='stylesheet' type='text/css' media='screen' href='..\css\loan.css'>
     <script src='main.js'></script>
 </head>
 
@@ -44,20 +44,20 @@
 
     <h1>Add New Book</h1>
     <form method="post" action="process_add_book.php">
-        <label for="title">Book Title: </label>
-        <input type="text" name="title" id="title"><br>
-        <label for="author">Author: </label>
-        <input type="text" name="author" id="author"><br>
-        <label for="publisher">Publisher: </label>
-        <input type="text" name="publisher" id="publisher"><br>
-        <label for="year">Publication Year: </label>
-        <input type="text" name="year" id="year"><br>
-        <label for="isbn">ISBN: </label>
-        <input type="text" name="isbn" id="isbn"><br>
-        <label for="available">Copies Obtained: </label>
-        <input type="number" name="available" id="available" min="1"><br>
-        <label for="branchID">Branch ID: </label>
-        <input type="text" name="branchID" id="branchID"><br>
+        <label for="title">Book Title </label>
+        <input type="text" name="title" id="title">
+        <label for="author">Author </label>
+        <input type="text" name="author" id="author">
+        <label for="publisher">Publisher </label>
+        <input type="text" name="publisher" id="publisher">
+        <label for="year">Publication Year </label>
+        <input type="text" name="year" id="year">
+        <label for="isbn">ISBN </label>
+        <input type="text" name="isbn" id="isbn">
+        <label for="available">Copies Obtained </label>
+        <input type="number" name="available" id="available" min="1">
+        <label for="branchID">Branch ID </label>
+        <input type="text" name="branchID" id="branchID">
         <input type='submit' value='Submit' name='submit'>
     </form>
 </body>
