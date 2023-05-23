@@ -1,9 +1,9 @@
 body {
     font-family: 'Helvetica Neue', sans-serif;
-    background-color: #f9f9f9;
+    background-color: #FFFFFF;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #FFFFFF;
 }
 
 .container {
@@ -21,17 +21,19 @@ table {
     border-collapse: collapse;
     margin-top: 20px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    
+    border-radius: 2px;
+    color: #1C263B
 }
 
 table, th, td {
-    border: 1px solid #ddd;
+    border: 1px solid none;
+    
     padding: 12px;
     text-align: left;
 }
 
 th {
-    background-color: #4b6858;
+    background-color: #1C263B;
     color: white;
 }
 
@@ -58,7 +60,7 @@ select {
 
 input[type="submit"] {
     padding: 10px 20px;
-    background-color: #4b6858;
+    background-color: #1C263B;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -67,5 +69,5 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #3a5547;
+    background-color: #0e1627;
 }

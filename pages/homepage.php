@@ -17,10 +17,10 @@ $patron = unserialize($_SESSION['user']);
 </head>
 
 <body>
+
     <div class="container">
-        <h1>Welcome, 
-            <?php echo $patron->getFirstName() . ' ' . $patron->getLastName() ?>
-        </h1>
+    <img src="..\images\South Harmon Institue of Technology (1).png" alt="SHIT Logo">
+        <h1>Welcome, <?php echo $patron->getFirstName() . ' ' . $patron->getLastName() ?></h1>
         <table>
             <tr>
                 <td><i class="fas fa-book"></i><a href="page_loan.php">View available books and loan a book</a></td>
@@ -48,5 +48,5 @@ $patron = unserialize($_SESSION['user']);
         </table>
     </div>
 </body>
-
 </html>
+

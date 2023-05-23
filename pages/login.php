@@ -48,11 +48,13 @@ if ($_POST) {
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Log In</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='..\css\main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='..\css\login.css'>
+
 </head>
 
 <body>
-    <main>
+    <div class="container">
+        <img src="..\images\South Harmon Institue of Technology.png" alt="SHIT Logo">
         <h1>Login</h1>
         <?php if (isset($error)) { ?>
             <p class="error-message">
@@ -69,10 +71,10 @@ if ($_POST) {
                 <input type="password" id="password" name="password">
             </div>
             <div class="form-group">
-                <input type="submit" value="Login">
+                <input type="submit" value="Log In">
             </div>
         </form>
-    </main>
+    </div>
 </body>
 
 </html>
