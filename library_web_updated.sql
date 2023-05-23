@@ -159,6 +159,16 @@ CREATE TABLE cd_loans (
   on update cascade on delete set null
 );
 
+CREATE TABLE admins(
+  adminID int NOT NULL AUTO_INCREMENT,
+  password varchar(99) NOT NULL,
+  firstName varchar(99) NOT NULL,
+  lastName varchar(99) NOT NULL,
+  address varchar(99) NOT NULL,
+  phone varchar(20) DEFAULT NULL,
+  PRIMARY KEY (adminID)
+);
+
 DELIMITER $$
 CREATE TRIGGER UpdateAvailableAfterLoan
 AFTER INSERT ON loans
@@ -354,6 +364,13 @@ VALUES
 (3, 'Jiro Dreams of Sushi', 'David Gelb', 2011, 'DVD', 3),
 (4, 'The Act of Killing', 'Joshua Oppenheimer', 2012, 'Blu-ray', 4),
 (5, 'Won\'t You Be My Neighbor?', 'Morgan Neville', 2018, 'DVD', 5);
+
+INSERT INTO admins (password, firstName, lastName, address, phone) 
+VALUES 
+('password123', 'Tony', 'Stark', '10880 Malibu Point', '555-123-4567'), 
+('adminpass', 'Steve', 'Rogers', '569 Leaman Place', '555-234-5678'), 
+('securepw', 'Natasha', 'Romanoff', '443 Black Widow Lane', NULL), 
+('password456', 'Thor', 'Odinson', 'Asgard', '555-345-6789');
 
 -- insert into holds values (1, 1234567891, 1, 2, '2022-05-09');
 
