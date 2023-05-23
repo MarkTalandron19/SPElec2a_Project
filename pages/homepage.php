@@ -3,7 +3,15 @@ session_save_path('..\sessions');
 session_start();
 require_once('..\classes\Patron.php');
 $patron = unserialize($_SESSION['user']);
+
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -17,35 +25,41 @@ $patron = unserialize($_SESSION['user']);
 </head>
 
 <body>
-
+<form method="post">
+            <button type="submit" name="logout" class="logout-button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </form>
     <div class="container">
+
     <img src="..\images\South Harmon Institue of Technology (1).png" alt="SHIT Logo">
         <h1>Welcome, <?php echo $patron->getFirstName() . ' ' . $patron->getLastName() ?></h1>
+
+
         <table>
-            <tr>
-                <td><i class="fas fa-book"></i><a href="page_loan.php">View available books and loan a book</a></td>
-                <td><i class="fas fa-compact-disc"></i><a href="page_cd_loan.php">View available music CDs and loan a CD</a></td>
-            </tr>
-            <tr>
-                <td><i class="fas fa-video"></i><a href="page_video_loan.php">View available videos and loan a video</a></td>
-                <td><i class="fas fa-hand-holding-heart"></i><a href="page_holds.php">Request to hold a book</a></td>
-            </tr>
-            <tr>
-                <td><i class="fas fa-exchange-alt"></i><a href="page_transfers.php">Request a book transfer</a></td>
-                <td><i class="fas fa-redo-alt"></i><a href="page_renew.php">Request a book renewal</a></td>
-            </tr>
-            <tr>
-                <td><i class="fas fa-book-reader"></i><a href="current_user_book_loans.php">View loaned books</a></td>
-                <td><i class="fas fa-hand-holding"></i><a href="current_user_holds.php">View held books</a></td>
-            </tr>
-            <tr>
-                <td><i class="fas fa-dolly-flatbed"></i><a href="current_user_transfers.php">View transferred books</a></td>
-                <td><i class="fas fa-compact-disc"></i><a href="current_user_cd_loans.php">View loaned music CDs</a></td>
-            </tr>
-            <tr>
-                <td><i class="fas fa-film"></i><a href="current_user_video_loans.php">View loaned videos</a></td>
-            </tr>
+        <tr>
+            <td><button onclick="window.location.href='page_loan.php'"><i class="fas fa-book"></i> View available books and loan a book</button></td>
+            <td><button onclick="window.location.href='page_cd_loan.php'"><i class="fas fa-compact-disc"></i> View available music CDs and loan a CD</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="window.location.href='page_video_loan.php'"><i class="fas fa-video"></i> View available videos and loan a video</button></td>
+            <td><button onclick="window.location.href='page_holds.php'"><i class="fas fa-hand-holding-heart"></i> Request to hold a book</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="window.location.href='page_transfer.php'"><i class="fas fa-exchange-alt"></i> Request a book transfer</button></td>
+            <td><button onclick="window.location.href='page_renew.php'"><i class="fas fa-redo-alt"></i> Request a book renewal</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="window.location.href='current_user_book_loans.php'"><i class="fas fa-book-reader"></i> View loaned books</button></td>
+            <td><button onclick="window.location.href='current_user_holds.php'"><i class="fas fa-hand-holding"></i> View held books</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="window.location.href='current_user_transfers.php'"><i class="fas fa-dolly-flatbed"></i> View transferred books</button></td>
+            <td><button onclick="window.location.href='current_user_cd_loans.php'"><i class="fas fa-compact-disc"></i> View loaned music CDs</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="window.location.href='current_user_video_loans.php'"><i class="fas fa-film"></i> View loaned videos</button></td>
+        </tr>
         </table>
+
     </div>
 </body>
 </html>

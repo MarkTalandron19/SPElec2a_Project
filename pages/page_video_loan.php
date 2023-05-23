@@ -15,9 +15,10 @@ session_start();
 </head>
 
 <body>
+<a href="homepage.php" class="back-button">Back</a>
     <?php
     require_once('..\LibraryORM.php');
-    $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
+    $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', '', false);
     $result = $db->select()->from('videos')->getAll();
 
 

@@ -12,7 +12,7 @@
 
 <?php
 require_once('..\LibraryORM.php');
-$db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
+$db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', '', false);
 
 if (isset($_POST["submit"])) {
     $selected_option_value = $_POST['book'];

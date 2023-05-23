@@ -6,14 +6,14 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Books Per Branch</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='current.css'>
     <script src='main.js'></script>
 </head>
 
 <body>
     <?php
     require_once('LibraryORM.php');
-    $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
+    $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', '', false);
     $result = $db->getBooksPerBranch();
 
 

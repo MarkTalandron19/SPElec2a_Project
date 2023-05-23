@@ -4,7 +4,7 @@ session_start();
 require_once('..\LibraryORM.php');
 require_once('..\classes\Patron.php');
 $patron = unserialize($_SESSION['user']);
-$db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
+$db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', '', false);
 
 $loans = $db->getUserVideoLoans($patron->getID());
 if (count($loans) > 0) {

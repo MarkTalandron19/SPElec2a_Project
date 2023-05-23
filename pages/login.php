@@ -4,7 +4,7 @@ session_start();
 
 require_once('..\LibraryORM.php');
 require_once('..\classes\Patron.php');
-$db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
+$db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', '', false);
 
 if ($_POST) {
     $logInID = $_POST['patronID'];

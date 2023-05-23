@@ -11,12 +11,13 @@
 </head>
 
 <body>
+<a href="homepage.php" class="back-button">Back</a>
     <?php
     session_save_path('..\sessions');
     session_start();
     require_once('..\LibraryORM.php');
     require_once('..\classes\Patron.php');
-    $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', 'root', false);
+    $db = new LibraryORM('mysql:host=localhost;dbname=library', 'root', '', false);
     $patron = unserialize($_SESSION['user']);
 
     $loans = $db->select()->from('loans')->where('patronID', $patron->getID())->get();

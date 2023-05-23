@@ -23,7 +23,7 @@ body {
 }
 
 h1 {
-    color: #4b6858;
+    color: #1C263B;
     margin-bottom: 20px;
 }
 
@@ -31,7 +31,7 @@ a {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #4b6858;
+    background-color: #1C263B;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -39,7 +39,7 @@ a {
 }
 
 a:hover {
-    background-color: #3a5547;
+    background-color: #0e1627;
 }
 
 table {
