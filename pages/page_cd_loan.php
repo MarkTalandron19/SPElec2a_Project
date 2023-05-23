@@ -24,14 +24,13 @@ session_start();
     if (count($result) > 0) {
         echo "<form method='post' action='process_book.php'>";
         echo "<table>";
-        echo "<tr><th>Title</th><th>Artist</th><th>Release Year</th><th>Genre</th><th>Branch ID</th><th>Available</th></tr>";
+        echo "<tr><th>Title</th><th>Artist</th><th>Release Year</th><th>Genre</th></tr>";
 
         foreach ($result as $row) {
             echo "<tr><td>" . $row["title"] .
                 "</td><td>" . $row["artist"] .
                 "</td><td>" . $row["releaseYear"] .
-                "</td><td>" . $row["genre"] .
-                "</td><td>" . $row["branchID"];
+                "</td><td>" . $row["genre"] ;
         }
 
         echo "</table>";
